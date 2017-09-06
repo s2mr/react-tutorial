@@ -19,13 +19,20 @@ class Square extends React.Component {
 }
 
 class Board extends React.Component {
+  //子（Squareでなく)親が状態を管理
+  //そのほうがシンプルに書ける
+  constructor() {
+    super();
+    this.state = {
+      squares: Array(9).fill(null),
+    }
+  }
   renderSquare(i) {
-    return <Square value={i}/>;
+    return <Square value={this.state.squares[i]} />;
   }
 
   render() {
     const status = 'Next player: X';
-
     return (
       <div>
         <div className="status">{status}</div>
