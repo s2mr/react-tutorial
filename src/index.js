@@ -3,16 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 class Square extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      value : null,
-    };
-  }
   render() {
     return (
-      <button className="square" onClick={() => this.setState({value: "X"})}>
-        {this.state.value}
+      <button className="square" onClick={() => this.props.onClick()  }>
+        {this.props.value}
       </button>
     );
   }
@@ -27,8 +21,25 @@ class Board extends React.Component {
       squares: Array(9).fill(null),
     }
   }
+  
+  handleClick(i) {
+    console.log("CLICKED::", i)
+    const squares = this.state.squares.slice();
+    squares[i] = "X";
+    this.setState({squares: squares})
+    
+    //なんかこれだと実行できなかった。
+    // １行で書けたら便利なのに
+    // this.state.squares[i] = "X"
+  }
+  
   renderSquare(i) {
-    return <Square value={this.state.squares[i]} />;
+    return (
+      <Square
+      // 二つのprops
+       value={this.state.squares[i]}
+       onClick={ () => this.handleClick(i) } />
+     );
   }
 
   render() {
