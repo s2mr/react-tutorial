@@ -2,18 +2,28 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-class Square extends React.Component {
-  render() {
+//コントロールドコンポーネント(自身は状態を保持しておらず、Boardに管理されている)
+//ファンクショナルコンポーネント（renderメソッドしか持っていないコンポーネント）
+// class Square extends React.Component {
+//   render() {
+//     return (
+//       <button className="square" onClick={() => this.props.onClick()  }>
+//         {this.props.value}
+//       </button>
+//     );
+//   }
+// }
+
+function Square(props) {
     return (
-      <button className="square" onClick={() => this.props.onClick()  }>
-        {this.props.value}
-      </button>
+        <button className="square" onClick={props.onClick}>
+        {props.value}
+        </button>
     );
-  }
 }
 
 class Board extends React.Component {
-  //子（Squareでなく)親が状態を管理
+  //子（Square)でなく親が状態を管理
   //そのほうがシンプルに書ける
   constructor() {
     super();
