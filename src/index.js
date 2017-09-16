@@ -29,14 +29,19 @@ class Board extends React.Component {
     super();
     this.state = {
       squares: Array(9).fill(null),
+      xIsNext: true,
     }
   }
   
   handleClick(i) {
     console.log("CLICKED::", i)
+    console.log("xIsNext::", this.state.xIsNext)
     const squares = this.state.squares.slice();
     squares[i] = "X";
-    this.setState({squares: squares})
+    this.setState({
+        squares: squares,
+        xIsNext: !this.state.xIsNext,
+    })
     
     //なんかこれだと実行できなかった。
     // １行で書けたら便利なのに
@@ -53,7 +58,7 @@ class Board extends React.Component {
   }
 
   render() {
-    const status = 'Next player: X';
+    const status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
     return (
       <div>
         <div className="status">{status}</div>
